@@ -1,0 +1,413 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in, top=0.8in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\newenvironment{claim}[1]{\par\noindent{\bfseries Claim.}\space#1}{}
+\renewenvironment{proof}{{\noindent\bfseries Proof.}}{\qed}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+% Hole with anything in it (given by arg)
+\newcommand*\cir[1]{
+  \begin{tikzpicture}[baseline]
+    \node[draw,circle,inner sep=0pt,minimum size=12pt,anchor=center](C){#1};
+  \end{tikzpicture}}
+% Empty hole
+\newcommand*\h{\cir{}}
+% Hole with peg
+\newcommand*\p{
+  \begin{tikzpicture}[baseline]
+    \node[draw,circle,inner sep=0pt,minimum size=12pt,anchor=center](C){};
+    \node[fill=black,circle,inner sep=0pt,minimum size=5pt,anchor=center](C){};
+  \end{tikzpicture}}
+% Hole with x
+\newcommand*\x{\cir{$x$}}
+% Hole with y
+\newcommand*\y{\cir{$y$}}
+% Hole with z
+\newcommand*\z{\cir{$z$}}
+
+\newcommand*\englishstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \p & \p & \p &    & \\
+   &    & \p & \p & \p &    & \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \h & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+   &    & \p & \p & \p &    & \\
+   &    & \p & \p & \p &    & \\
+\end{tabular}}
+
+\newcommand*\englishtessellatedstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \x & \y & \z &    & \\
+   &    & \y & \z & \x &    & \\
+\x & \y & \z & \x & \y & \z & \x \\
+\y & \z & \x & \y & \z & \x & \y \\
+\z & \x & \y & \z & \x & \y & \z \\
+   &    & \z & \x & \y &    & \\
+   &    & \x & \y & \z &    & \\
+\end{tabular}}
+
+\newcommand*\europeanstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \p & \p & \p &    & \\
+   & \p & \p & \p & \p & \p & \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \h & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+   & \p & \p & \p & \p & \p & \\
+   &    & \p & \p & \p &    & \\
+\end{tabular}}
+
+\newcommand*\europeantessellatedstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \x & \y & \z &    & \\
+   & \x & \y & \z & \x & \y & \\
+\x & \y & \z & \x & \y & \z & \x \\
+\y & \z & \x & \y & \z & \x & \y \\
+\z & \x & \y & \z & \x & \y & \z \\
+   & \y & \z & \x & \y & \z & \\
+   &    & \x & \y & \z &    & \\
+\end{tabular}}
+
+\newcommand*\squaresevenstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \h & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+\p & \p & \p & \p & \p & \p & \p \\
+\end{tabular}}
+
+\newcommand*\squareseventessellatedstart{
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+\x & \y & \z & \x & \y & \z & \x \\
+\y & \z & \x & \y & \z & \x & \y \\
+\z & \x & \y & \z & \x & \y & \z \\
+\x & \y & \z & \x & \y & \z & \x \\
+\y & \z & \x & \y & \z & \x & \y \\
+\z & \x & \y & \z & \x & \y & \z \\
+\x & \y & \z & \x & \y & \z & \x \\
+\end{tabular}}
+
+\newcommand*\trianglefivestart{
+\begin{tabular}{m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt}}
+   &    &    &    & \p &    &    &    &    \\
+   &    &    & \p &    & \p &    &    &    \\
+   &    & \p &    & \p &    & \p &    &    \\
+   & \p &    & \p &    & \p &    & \p &    \\
+\p &    & \p &    & \p &    & \p &    & \h \\
+\end{tabular}}
+
+\newcommand*\trianglefivetessellated{
+\begin{tabular}{m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt}}
+   &    &    &    & \x &    &    &    &    \\
+   &    &    & \y &    & \z &    &    &    \\
+   &    & \z &    & \x &    & \y &    &    \\
+   & \x &    & \y &    & \z &    & \x &    \\
+\y &    & \z &    & \x &    & \y &    & \z \\
+\end{tabular}}
+
+\newcommand*\trianglefivenumbered{
+\begin{tabular}{m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt}}
+   &    &    &    & \cir{1} &    &    &    &    \\
+   &    &    & \cir{2} &    & \cir{3} &    &    &    \\
+   &    & \cir{4} &    & \cir{5} &    & \cir{6} &    &    \\
+   & \cir{7} &    & \cir{8} &    & \cir{9} &    & \cir{10} &    \\
+\cir{11} &    & \cir{12} &    & \cir{13} &    & \cir{14} &    & \cir{15} \\
+\end{tabular}}
+
+\setlength\parskip{\baselineskip}
+
+\begin{document}
+
+\title{A Group-Theoretic Approach to Peg Solitaire}
+\author{Matt Kelly}
+\date{December 18, 2013}
+
+\maketitle
+
+%--------------------------------------------------------------------
+\section{Introduction}
+%--------------------------------------------------------------------
+Peg solitaire is a simple yet challenging single-person board game. Given an initial board configuration consisting of empty holes and holes with pegs, the objective is to remove as many pegs as possible. To remove a peg, a player must \emph{jump} over it with another peg. Arie Bialostocki provides a great, easy explanation of how group theory can be applied to peg solitaire in his 1998 paper on the subject \cite{Bialostocki}. He uses the Klein 4-group as a tool for understanding which winning configurations (those with only one peg left) are possible and also provides an algorithm for achieving those winning configurations. The goal of this paper is to further explain Bialostocki's results as well as to expand on them.
+
+There are many board variants that can be used. Indeed, one can even come up with a unique board and initial configuration. However, there are two classic boards that are most widely used: the English board and the European (or French) board. These boards are shown in Figure \ref{fig:classicboards}.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\englishstart
+\caption{English board}\label{subfig:classicboards:a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\europeanstart
+\caption{European board}\label{subfig:classicboards:b}
+\end{subfigure}
+\caption{Example initial configurations for classic boards}
+\label{fig:classicboards}
+\end{figure}
+
+Bialostocki focuses exclusively on the English board, but we will show that his method can be extended to the European board and other variants as well. The Klein 4-group is used.
+
+%--------------------------------------------------------------------
+\section{The Klein 4-Group}
+%--------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tabular}{c|c}
+Element & Symbol \\ \hline
+(0, 0) & $e$ \\
+(0, 1) & $x$ \\
+(1, 0) & $y$ \\
+(1, 1) & $z$ \\
+\end{tabular}
+\caption{Representation of $G$}\label{subfig:G:a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tabular}{c|c c c c}
++   & $e$ & $x$ & $y$ & $z$ \\ \hline
+$e$ & $e$ & $x$ & $y$ & $z$ \\
+$x$ & $x$ & $e$ & $z$ & $y$ \\
+$y$ & $y$ & $z$ & $e$ & $x$ \\
+$z$ & $z$ & $y$ & $x$ & $e$   \\
+\end{tabular}
+\caption{Addition table for $G$}\label{subfig:G:b}
+\end{subfigure}
+\caption{Definition of $G = \mathbb{Z}_2 \oplus \mathbb{Z}_2$}
+\label{fig:G}
+\end{figure}
+
+This finite abelian group is isomorphic to the familiar external direct product $G = \mathbb{Z}_2 \oplus \mathbb{Z}_2$ under addition. All non-identity elements of this group have order two. Figure \ref{fig:G} gives the representation of each element in $G$ that we will use for the remainder of this paper. The addition table is also provided. As Bialostocki notes, this group has two relevant properties given as Properties 1 and 2 here. In addition, we formally prove a third property necessary to the analysis of peg solitaire configurations. Property 3 allows us to cross off sets of $\left\{x, y, z\right\}$ for easy counting, as we will soon see.
+
+\begin{description}
+\item[Property 1.] Every element is its own inverse.
+
+\begin{proof}
+Let $a \in G$ where $a \neq e$. Then $a$ has order two by definition so $a + a = e$. Adding the inverse of $a$ to each side we get $a = -a$, the inverse of $a$.
+\end{proof}
+
+\item[Property 2.] The sum of any two distinct non-identity elements is equal to the third non-identity element.
+
+\begin{proof}
+The addition table in Figure \ref{fig:G}\subref{subfig:G:b} provides a direct proof of this.
+\end{proof}
+
+\item[Property 3.] The sum of all three non-identity elements equals the identity, $e$.
+
+\begin{proof}
+Let $a, b, c$ be three unique non-identity elements in $G$. Then $a + b + c = a + (b + c) = a + (-a) = e$ by Property 2.
+\end{proof}
+
+\end{description}
+
+Why is the Klein 4-group, then, especially applicable to peg solitaire? Obviously, the fact that is abelian is necessary. But let us look further and consider an arbitrary move as shown in Figure \ref{fig:jump}.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.4\textwidth}
+\centering
+\begin{tabular}{c m{3pt} m{3pt} m{3pt}}
+Before & \p & \p & \h \\
+After & \h & \h & \p
+\end{tabular}
+\end{subfigure}%
+\begin{subfigure}{.4\textwidth}
+\centering
+\begin{tabular}{c m{3pt} m{3pt} m{3pt}}
+Before & \x & \y & \h \\
+After & \h & \h & \z
+\end{tabular}
+\end{subfigure}
+\caption{Arbitrary jump translated to its representation in $G$}
+\label{fig:jump}
+\end{figure}
+
+If we label spaces of the board as consecutive non-identity elements in $G$, then we can see that a jump translates exactly to the group operation of addition. In this case, $x$ jumps over $y$ and yields $x + y = z$. This is the reason we chose $G$ to be the Klein 4-group. We can now \emph{tessellate} entire boards with the set $\left\{x, y, z\right\}$ in order to gain more insight into given game configurations. Figure \ref{fig:classicboardstessellated} shows the fully tessellated English and European boards.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\englishtessellatedstart
+\caption{English board}\label{subfig:classicboardstessellated:a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\europeantessellatedstart
+\caption{European board}\label{subfig:classicboardstessellated:b}
+\end{subfigure}
+\caption{Classic peg solitaire boards tessellated with non-identity elements in $G$}
+\label{fig:classicboardstessellated}
+\end{figure}
+
+Finally, we can define the signature function $S$. The value of $S$ is equal to the sum of all holes with pegs for any given board configuration. The most significant aspect of this function for our purposes is the fact that the value of $S$ is invariant under all legal moves during gameplay. This is a direct result of the second property listed for $G$, and it is illustrated in Figure \ref{fig:jump}. It follows that we can use $S$ as a tool to determine which board configurations are impossible from a given starting configuration. From this we can determine the candidate solutions, if any, for solitaire games.
+
+%--------------------------------------------------------------------
+\section{The Single-Peg Complement Problem}
+%--------------------------------------------------------------------
+The \emph{single-peg complement problem}, hereby referred to as simply the complement problem, is as follows: given an initial board configuration with a single peg missing, perform a series of legal moves such that the ending configuration is the exact opposite, or complement, of the starting position. For example, in the case of Figure \ref{fig:classicboards}\subref{subfig:classicboards:a}, the ending configuration for the complement problem is an empty board with the exception of a single peg in the exact center. We label this center (0, 0) and follow a standard Cartesian coordinate system for ease of analysis.
+\subsection{English Board}
+Let us first consider the English board. Bialostocki also provides a proof of the following result, but we will provide our own in order to introduce notation for the remainder of the paper.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \h & \p & \h &    & \\
+   &    & \p & \h & \h &    & \\
+\h & \p & \h & \h & \p & \h & \h \\
+\p & \h & \h & \p & \h & \h & \p \\
+\h & \h & \p & \h & \h & \p & \h \\
+   &    & \h & \h & \p &    & \\
+   &    & \h & \p & \h &    & \\
+\end{tabular}
+\caption{Pegs with value $y$}\label{subfig:englishanalysis:a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tabular}{m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt} m{3pt}}
+   &    & \h & \p & \h &    & \\
+   &    & \h & \h & \h &    & \\
+\h & \h & \h & \h & \h & \h & \h \\
+\p & \h & \h & \p & \h & \h & \p \\
+\h & \h & \h & \h & \h & \h & \h \\
+   &    & \h & \h & \h &    & \\
+   &    & \h & \p & \h &    & \\
+\end{tabular}
+\caption{Reachable single-peg configurations}\label{subfig:englishanalysis:b}
+\end{subfigure}
+\caption{Analysis of English board}
+\label{fig:englishanalysis}
+\end{figure}
+
+\begin{claim}
+There are at most five positions where a single peg can be left (alternatively, there are 28 positions where a single peg cannot be left). One of those five positions corresponds to the solution of the complement problem given in Figure \ref{fig:classicboards}\subref{subfig:classicboards:a}.
+\end{claim}
+
+\begin{proof}
+We denote $S^{Eng}_i$ as the value of the signature function after $i$ moves, with $S^{Eng}_0$ the value of the starting configuration. We calculate $S^{Eng}_0 = y$ for the starting configuration from Figure \ref{fig:classicboards}\subref{subfig:classicboards:a} by crossing out elements using Property 3 and adding the remainder. Exactly 31 moves are made for a solution to the complement problem since exactly one peg is removed per jump and there are 32 pegs to start. Thus we require that $S^{Eng}_{31} = y$. Figure \ref{fig:englishanalysis}\subref{subfig:englishanalysis:a} shows all pegs with value $y$.
+
+We are not done because the set of impossible solutions must be further expanded by exploiting the horizontal and vertical symmetry of the board. For example, even though the peg at (-2, 1) has value $y$, it is an impossible final configuration because if it were reachable then (-2, -1) and (2, 1) would be reachable by symmetry (simply mirror the moves). But these locations do not have value $y$ and thus they are unreachable, so they are eliminated. This eliminates seven of the remaining configurations, yielding 28 impossible positions and leaving the five positions shown in Figure \ref{fig:englishanalysis}\subref{subfig:englishanalysis:b}. The central peg remains, and so the complement problem is not impossible.
+\end{proof}
+
+Notice that we have not proven that these five positions are indeed reachable because this requires an algorithm for reaching them. We refer to Bialostocki's paper for an algorithm for reaching any of these configurations; this is out of the scope of this paper.
+
+\subsection{European Board}
+Bialostocki does not provide an analysis of the European board using this group-theoretic approach, so we will provide it here. Consider the equivalent complement problem for the European board shown in Figure \ref{fig:classicboards}\subref{subfig:classicboards:b}.
+
+\begin{claim}
+The complement problem for (0, 0) is unsolvable on the European board.
+\end{claim}
+
+\begin{proof}
+We refer again to the tessellations shown in Figure \ref{fig:classicboardstessellated}. Notice that the pattern for the European board is exactly the same as the English board except for the addition of $x+ 2y + z$. The English board had $S^{Eng}_0 = y$, thus we calculate $S^{Euro}_0 = S^{Eng}_0 + x + 2y + z = 3y + (x + z)$. Applying Property 2 of $G$ we find that $S^{Euro}_0 = 4y$ which, by Property 1, is equal to the identity $e$. But $e$ is not a valid value for a peg on the European board (or any board), therefore the complement problem for a central peg on the European board is unsolvable.
+\end{proof}
+
+More generally, now let us determine if \emph{any} complement problems are solvable on the European board. By leveraging symmetry arguments again we can eliminate all possible complement problems as unsolvable.
+
+\begin{claim}
+There are zero solvable complement problems for the European board.
+\end{claim}
+
+\begin{proof}
+There are three possibilities for $S$ for a solvable complement problem: $x, y, z$. Consider first the possibility that $S = x$. Studying the group tessellation in Figure \ref{fig:classicboardstessellated}\subref{subfig:classicboardstessellated:b}, we see that there are zero pegs with value $x$ that satisfy the horizontal and vertical symmetry requirements. This is also true for $S = z$. We are left with the possibility that $S = y$. It is easy to see that there are pegs with value $y$ that satisfy the horizontal and vertical symmetry requirements, such as (-3, 0). However, the value of $S^{Euro}_0$ will always be $12x + 13y + 12z - y = e$ for any starting configuration with a single empty hole corresponding to a value of $y$. As was already shown, this means that these configurations are unsolvable. Therefore our group-theoretic approach shows that there are zero solvable complement problems for the European board.
+\end{proof}
+
+%--------------------------------------------------------------------
+\section{Bialostocki's Exercises}
+%--------------------------------------------------------------------
+We have already extended Bialostocki's results to the European board which goes completely unmentioned in his paper. He also provides specific example problems for the reader to solve that involve other board variants. The solutions are provided here.
+
+\begin{problem}{1}
+Prove that if peg solitaire is played on a 7 x 7 board with a starting position of a single vacant location in the center of the board, then it is impossible to leave a single peg anywhere.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\squaresevenstart
+\caption{Starting configuration}\label{subfig:squareanalysis:a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\squareseventessellatedstart
+\caption{Tessellated}\label{subfig:squareanalysis:b}
+\end{subfigure}
+\caption{Analysis of 7 x 7 square board}
+\label{fig:squareanalysis}
+\end{figure}
+
+\begin{proof}
+From Figure \ref{fig:squareanalysis} we calculate $S^{Square}_0 = 16x + 16y + 16z = e$ by Property 1 of $G$. $S$ is invariant and so the last move must result in a single peg with value $e$. But $e$ is not a valid value for a peg in our tessellation, thus it is impossible to leave a single peg anywhere.
+\end{proof}
+\end{problem}
+
+\begin{problem}{2}
+Another common version of peg solitaire has 14 pegs in 15 holes arranged in an equilateral triangular array with one corner hole empty. Using our group-theoretic approach, prove that there are ten locations in which it is impossible to leave a single peg.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.3\textwidth}
+\centering
+\trianglefivestart
+\caption{Starting configuration}\label{subfig:triangleanalysis:a}
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+\centering
+\trianglefivetessellated
+\caption{Tessellated}\label{subfig:triangleanalysis:b}
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+\centering
+\begin{tabular}{m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt} m{0pt}}
+   &    &    &    & \h &    &    &    &    \\
+   &    &    & \h &    & \p &    &    &    \\
+   &    & \p &    & \h &    & \h &    &    \\
+   & \h &    & \h &    & \p &    & \h &    \\
+\h &    & \p &    & \h &    & \h &    & \p \\
+\end{tabular}
+\caption{Possible single-peg solutions}\label{subfig:triangleanalysis:c}
+\end{subfigure}
+\caption{Analysis of equilateral triangle board with side length five}
+\label{fig:triangleanalysis}
+\end{figure}
+
+\begin{proof}
+From Figures \ref{fig:triangleanalysis}\subref{subfig:triangleanalysis:a} and \ref{fig:triangleanalysis}\subref{subfig:triangleanalysis:b} we calculate $S^{Triangle}_0 = 5x + 5y + 6z = x + y = z$ by Properties 1 and 2 of $G$. $S$ is invariant and so the last move must result in a single peg with value $z$. There are five such locations, shown in Figure \ref{fig:triangleanalysis}\subref{subfig:triangleanalysis:c}. Thus the remaining ten locations are impossible final configurations for leaving a single peg.
+
+Note that the only symmetry of the board and the initial configuration of the pegs is reflection through the altitude from the empty vertex. By this symmetry, we see that none of the five locations of Figure \ref{fig:triangleanalysis}\subref{subfig:triangleanalysis:c} can be added to the set of impossible positions.
+\end{proof}
+
+Again, we will not provide algorithms to prove that all such positions are indeed reachable; this is considered out of the scope of this paper.
+\end{problem}
+
+%--------------------------------------------------------------------
+\section{Summary \& Future Work}
+%--------------------------------------------------------------------
+Peg solitaire is a fun game to play and analyze. We have shown in this paper how elementary group theory can be used as a tool for this analysis. The results from Bialostocki's 1998 paper on the subject were extended to several other boards. In addition, many details have been filled in and the role of the Klein 4-group and the reason it was chosen have been elaborated on. Unfortunately, the scope of this paper is necessarily quite limited. In the future, it would be interesting to extend this group-theoretic approach even further - namely to non-symmetric and large boards. It should also be possible to apply this approach to determine the exact properties a board requires in order to have solvable complement problems.
+
+\bibliographystyle{plain}
+\bibliography{solitaire}
+
+\end{document}
